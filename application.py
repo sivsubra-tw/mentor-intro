@@ -32,7 +32,7 @@ def reset():
 def index():
 	if session.get("questions_so_far") is None:
 		reset()
-	return render_template("index.html", questions_so_far = session["questions_so_far"])
+	return render_template("index.html", questions_so_far = session["questions_so_far"], categories_so_far = session["categories_so_far"])
 
 
 @app.route("/", methods=["POST"])
@@ -49,5 +49,6 @@ def question():
 		session["categories_so_far"][category] += 1
 		session["questions_so_far"].append((category,questions[category][session["questions_id"][category]]))
 
-		return render_template("index.html", question = questions[category][session["questions_id"][category]], questions_so_far = session["questions_so_far"])
+		return render_template("index.html", curr_question = questions[category][session["questions_id"][category]], questions_so_far = session["questions_so_far"], 
+				categories_so_far = session["categories_so_far"])
 	

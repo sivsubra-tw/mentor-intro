@@ -67,30 +67,19 @@
 
 			<br> <br> <br> <br> <br>
 
-			<h3 align = "center"> {{ question }} </h3>
+			<h3 align = "center"> {{ curr_question }} </h3>
 
 		</div>
 
 		<br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
 
+		<div class = "col-lg-3 pull-right">
+			<button type="button" class="btn btn-info"></button> : {{ categories_so_far.0}} <br>
+			<button type="button" class="btn btn-danger"></button> : {{ categories_so_far.1 }} <br>
+			<button type="button" class="btn btn-success"></button> : {{ categories_so_far.2 }} <br>
+		</div>
+
 		<footer>
-
-			<div class="btn-group" role="group" aria-label="Basic example">
-
-				{% for questions in questions_so_far %}
-
-					{% if questions.0 == 0 %}
-						  <button type="button" class="btn btn-info">Pe</button>
-					{% elif questions.0 == 1 %}
-						  <button type="button" class="btn btn-danger">Pr</button>
-					{% else %}
-						<button type="button" class="btn btn-success">Mi</button>
-					{% endif %}
-
-				{% endfor %}
-
-			</div>
-
 			<div class = "col-lg-6 pull-right">
 				<ul>
 					{% for questions in questions_so_far %}
