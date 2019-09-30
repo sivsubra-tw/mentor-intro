@@ -94,7 +94,13 @@
 			<div class = "col-lg-6 pull-right">
 				<ul>
 					{% for questions in questions_so_far %}
-						<li> {{ questions.1 }} </li>
+						{% if questions.0 == 0 %}
+							<li> <button type="button" class="btn btn-info"></button> {{ questions.1 }} </li>
+						{% elif questions.0 == 1 %}
+							<li> <button type="button" class="btn btn-danger"></button> {{ questions.1 }} </li>
+						{% else %}
+							<li> <button type="button" class="btn btn-success"></button> {{ questions.1 }} </li>
+						{% endif %}
 					{% endfor %}
 				</ul>
 			</div>
