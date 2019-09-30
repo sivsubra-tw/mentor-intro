@@ -1,10 +1,11 @@
-<!DOCTYPE html lang="en-GB">
-<html>
-	<meta charset="UTF-8">
+<!DOCTYPE html >
+<html lang="en-GB">
 	<head>
+		<meta charset="UTF-8">
+
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-		<script src="https://kit.fontawesome.com/0e59a4940c.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+		<script src="https://kit.fontawesome.com/0e59a4940c.js" crossorigin="anonymous"></script>
 
 		<title> Jitheshraj Scholarship for promising freshmen </title>
 	</head>
@@ -15,7 +16,7 @@
 
 		<div class="container">
 
-			<h1 align = "center"> Scholar-Mentor icebreaker </h1>
+			<h1 align = "center"> Icebreaker </h1>
 
 			<br> <br> <br> <br> <br>
 
@@ -58,7 +59,7 @@
 
 				<div class = "col-lg-2 col-sm-1"> 
 					<form action = "{{ url_for('question') }}" method = "post">
-						<button class = "btn" name = "category" value = "3"><i class ="fas fa-undo-alt"></i>Reset</button>
+						<button class = "btn" name = "category" value = "3"> Reset <i class ="fas fa-undo-alt"></i></button>
 					</form>
 				</div>
 
@@ -74,13 +75,13 @@
 
 		<footer>
 
-			<div class="btn-group pull-right" role="group" aria-label="Basic example">
+			<div class="btn-group" role="group" aria-label="Basic example">
 
-				{% for question in questions_so_far %}
+				{% for questions in questions_so_far %}
 
-					{% if question == 0 %}
+					{% if questions.0 == 0 %}
 						  <button type="button" class="btn btn-info">Pe</button>
-					{% elif question == 1 %}
+					{% elif questions.0 == 1 %}
 						  <button type="button" class="btn btn-danger">Pr</button>
 					{% else %}
 						<button type="button" class="btn btn-success">Mi</button>
@@ -88,6 +89,14 @@
 
 				{% endfor %}
 
+			</div>
+
+			<div class = "col-lg-6 pull-right">
+				<ul>
+					{% for questions in questions_so_far %}
+						<li> {{ questions.1 }} </li>
+					{% endfor %}
+				</ul>
 			</div>
 
 		</footer>

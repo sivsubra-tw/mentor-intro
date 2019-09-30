@@ -23,9 +23,10 @@ questions = [
 
 
 def reset():
-	session["questions_so_far"] = []
-	session["questions_id"] = [random.randint(0,2),random.randint(0,2),random.randint(0,2)]
-	session["categories_so_far"] = [0,0,0]
+	session["questions_so_far"] =[] #Maintains a pair list of category, question
+	session["questions_id"] = [random.randint(0,2),random.randint(0,2),random.randint(0,2)] #Maintains starting index of each category
+	session["categories_so_far"] = [0,0,0] #Maintains a questions counter for each category
+
 
 @app.route("/")
 def index():
@@ -46,9 +47,7 @@ def question():
 		session["questions_id"][category] += 1
 		session["questions_id"][category] %= 3
 		session["categories_so_far"][category] += 1
-
-		if session["categories_so_far"][category] <= 3:
-			session["questions_so_far"].append(category)
+		session["questions_so_far"].append((category,questions[category][session["questions_id"][category]]))
 
 		return render_template("index.html", question = questions[category][session["questions_id"][category]], questions_so_far = session["questions_so_far"])
 	
