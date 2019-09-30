@@ -16,6 +16,7 @@
 	border-spacing: 200px;
 	text-align: center;
 }
+
 .grid-item > .item1{
 	border: 3px solid black;
 	background-color: yellow;
