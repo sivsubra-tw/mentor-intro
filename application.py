@@ -5,6 +5,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
+	questions_so_far = []
 	return render_template("index.html")
 
 
@@ -21,10 +22,12 @@ questions = [
 			]
 
 questions_id = [random.randint(0,2),random.randint(0,2),random.randint(0,2)]
+questions_so_far = []
 
 @app.route("/", methods=["POST"])
 def question():
 	category = int(request.form.get("category"))
 	questions_id[category] += 1
 	questions_id[category] %= 3
-	return render_template("index.html", question = questions[category][questions_id[category]])
+	questions_so_far.append(category);
+	return render_template("index.html", question = questions[category][questions_id[category]], questions_so_far = questions_so_far)
