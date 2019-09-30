@@ -22,24 +22,33 @@ questions = [
 			]
 
 
+def reset():
+	session["questions_so_far"] = []
+	session["questions_id"] = [random.randint(0,2),random.randint(0,2),random.randint(0,2)]
+	session["categories_so_far"] = [0,0,0]
+
 @app.route("/")
 def index():
 	if session.get("questions_so_far") is None:
-		session["questions_so_far"] = []
-		session["questions_id"] = [random.randint(0,2),random.randint(0,2),random.randint(0,2)]
-		session["categories_so_far"] = [0,0,0]
-	return render_template("index.html")
+		reset()
+	return render_template("index.html", questions_so_far = session["questions_so_far"])
 
 
 @app.route("/", methods=["POST"])
 def question():
 	category = int(request.form.get("category"))
 
-	session["questions_id"][category] += 1
-	session["questions_id"][category] %= 3
-	session["categories_so_far"][category] += 1
+	if category == 3:
+		session.clear()
+		reset()
+		return render_template("index.html")
+	else :
+		session["questions_id"][category] += 1
+		session["questions_id"][category] %= 3
+		session["categories_so_far"][category] += 1
 
-	if session["categories_so_far"][category] <= 3:
-		session["questions_so_far"].append(category)
+		if session["categories_so_far"][category] <= 3:
+			session["questions_so_far"].append(category)
 
-	return render_template("index.html", question = questions[category][session["questions_id"][category]], questions_so_far = session["questions_so_far"])
+		return render_template("index.html", question = questions[category][session["questions_id"][category]], questions_so_far = session["questions_so_far"])
+	

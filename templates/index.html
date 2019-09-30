@@ -3,7 +3,7 @@
 	<meta charset="UTF-8">
 	<head>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="https://kit.fontawesome.com/0e59a4940c.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
 		<title> Jitheshraj Scholarship for promising freshmen </title>
@@ -21,7 +21,7 @@
 
 			<div class = "row">
 
-				<div class ="col-lg-2 col-sm-1"> </div>
+				<div class ="col-lg-1 col-sm-1"> </div>
 
 
 				<div class = "col-lg-3 col-sm-8"> 
@@ -56,9 +56,10 @@
 					</div> 
 				</div>
 
-
 				<div class = "col-lg-2 col-sm-1"> 
-					<button class = "btn" type = "reset"><i class ="fa fa-undo-alt"></i></button>
+					<form action = "{{ url_for('question') }}" method = "post">
+						<button class = "btn" name = "category" value = "3"><i class ="fas fa-undo-alt"></i>Reset</button>
+					</form>
 				</div>
 
 			</div>
