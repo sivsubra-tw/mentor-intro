@@ -15,14 +15,14 @@
 
 		<br>
 
-		<div class="container">
+		<div class="container-fluid">
 
 			<div class = "row">
-				<div class = "col-lg-3"></div>
-				<div class = "col-lg-6">
+				<div class = "col-lg-2"></div>
+				<div class = "col-lg-8">
 					<h2 align = "center"> Icebreaker </h2>
 				</div>
-				<div class = "col-lg-3">
+				<div class = "col-lg-2">
 					<form action = "{{ url_for('logout') }}">
 						<button class = "btn btn-primary"> 
 								Logout
@@ -33,57 +33,71 @@
 
 			<br>
 
-			<p align = "center"> Click one of the category below to generate a question. We recommend you cover at least 3 questions in each category </p>
+		</div>
+
+		<div class = "container">
+
+			<p align = "center"> Click one of the category below to generate a question. We recommend you cover at least 3 questions in each category. <br> This is an exercise in getting to know you: so try to let the conversation flow rather than focussing on getting a "correct" answer. </p>
 
 			<br> <br> <br>
+		</div>
+
+		<div class ="container-fluid">
 
 			<div class = "row">
 
-				<div class = "col-lg-1 pull-left">
+				<div class = "col-lg-2 text-left">
+					<form action = "{{ url_for('question') }}" method = "post">
+						<button class = "btn btn-secondary" name = "category" value = "3"> Reset <i class ="fas fa-undo-alt"></i></button>
+					</form>
 					<button type="button" class="btn btn-info"></button> : {{ categories_so_far.0}} <br>
 					<button type="button" class="btn btn-danger"></button> : {{ categories_so_far.1 }} <br>
 					<button type="button" class="btn btn-success"></button> : {{ categories_so_far.2 }} <br>
 				</div>
 
-				<div class = "col-lg-3"> 
+				<div class = "col-lg-2 text-left"> 
 					<div class = "item"> 
 						<form action = "{{ url_for('question') }}" method = "post">
 							<button class = "btn btn-info btn-block" name = "category" value = "0"> 
-								Personal
+								<h3> Personal </h3>
 							</button> 
 						</form>
 					</div> 
 				</div>
 
+				<div class = "col-lg-1 pull-right"> 
+				</div>
 
-				<div class = "col-lg-3"> 
+
+				<div class = "col-lg-2"> 
 					<div class = "item"> 
 						<form action = "{{ url_for('question') }}" method = "post">
 							<button class = "btn btn-danger btn-block" name = "category" value = "1"> 
-								Professional
+								<h3> Professional </h3>
 							</button> 
 						</form>
 					</div> 
 				</div>
 
 
-				<div class = "col-lg-3"> 
+				<div class = "col-lg-1 pull-right"> 
+				</div>
+
+				<div class = "col-lg-2"> 
 					<div class = "item"> 
 						<form action = "{{ url_for('question') }}" method = "post">
 							<button class = "btn btn-success btn-block" name = "category" value = "2"> 
-								Miscellaneous
+								<h3> Miscellaneous </h3>
 							</button> 
 						</form>
 					</div> 
 				</div>
 
-				<div class = "col-lg-2 pull-right"> 
-					<form action = "{{ url_for('question') }}" method = "post">
-						<button class = "btn" name = "category" value = "3"> Reset <i class ="fas fa-undo-alt"></i></button>
-					</form>
-				</div>
-
 			</div>
+
+		</div>
+
+		<div class = "container">
 
 			<br> <br> <br> <br>
 

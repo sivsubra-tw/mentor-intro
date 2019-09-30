@@ -13,3 +13,11 @@ h1 {
 .custom{
 	width: 300px !important;
 }
+
+.btn-block {
+    padding: 20% 0;
+    border-color: black;
+    border-width: 3px;
+    /* define values in pixels / Percentage or em. whatever suits 
+       your requirements */
+}
