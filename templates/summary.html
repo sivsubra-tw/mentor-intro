@@ -1,0 +1,55 @@
+<!DOCTYPE html >
+<html lang="en-GB">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+		<script src="https://kit.fontawesome.com/0e59a4940c.js" crossorigin="anonymous"></script>
+
+		<title> Jitheshraj Scholarship for promising freshmen </title>
+	</head>
+
+	<body>
+
+		<br> <br> <br>
+
+		<div class ="container">
+
+			<h3> A conversation to remember! </h3> <br> <br>
+
+			<div class = "row">
+
+				<div class = "col-lg-4">
+					<button type="button" class="btn btn-info"> Personal </button> <br> <br>
+					<ol>
+						{% for question in first %}
+							<li> {{ question }} </li>
+						{% endfor %}
+					</ol>
+				</div>
+
+				<div class = "col-lg-4">
+					<button type="button" class="btn btn-danger"> Professional </button> <br> <br>
+					<ol>
+						{% for question in second %}
+							<li> {{ question }} </li>
+						{% endfor %}
+					</ol>
+				</div>
+
+				<div class = "col-lg-4">
+					<button type="button" class="btn btn-success"> Miscellaneous </button> <br>
+					<ol>
+						{% for question in third %}
+							<li> {{ question }} </li>
+						{% endfor %}
+					</ol>
+				</div>
+
+			</div>
+			
+		</div>
+	</body>
+</html>

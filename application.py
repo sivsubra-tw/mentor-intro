@@ -11,7 +11,7 @@ Session(app)
 
 questions = [
 			 ['Tell me about a time when everything went wrong. How did you deal with it?', 
-			  'Describe a moment when you felt like you truly achieved something',
+			  'Describe a moment when you felt like you truly achieved something.',
 			  'What is your favourite childhood memory?'],
 			 ['Are there times when you feel like you do not like your job? If yes, what do you do then?', 
 			  'What is something you wish you knew before you started your career?', 
@@ -42,7 +42,7 @@ def question():
 	if category == 3:
 		session.clear()
 		reset()
-		return render_template("index.html")
+		return render_template("index.html", questions_so_far = session["questions_so_far"], categories_so_far = session["categories_so_far"])
 	else :
 		session["questions_id"][category] += 1
 		session["questions_id"][category] %= 3
@@ -51,4 +51,21 @@ def question():
 
 		return render_template("index.html", curr_question = questions[category][session["questions_id"][category]], questions_so_far = session["questions_so_far"], 
 				categories_so_far = session["categories_so_far"])
+
+@app.route("/summary")
+def logout():
+	print("Entered")
+	questions_so_far = session["questions_so_far"]
+	session.clear()
+	first = []
+	second = []
+	third = []
+	for category, question in questions_so_far:
+		if category == 0:
+			first.append(question)
+		elif category == 1:
+			second.append(question)
+		else:
+			third.append(question)
+	return render_template("summary.html", first = first, second = second, third = third)
 	

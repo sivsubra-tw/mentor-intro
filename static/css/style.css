@@ -1,3 +1,15 @@
 h1 {
 	text-align: center;
 }
+
+.space100{
+	line-height: 100px;
+}
+
+.space50{
+	line-height: 50px;
+}
+
+.custom{
+	width: 300px !important;
+}

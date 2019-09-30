@@ -1,7 +1,8 @@
 <!DOCTYPE html >
 <html lang="en-GB">
 	<head>
-		<meta charset="UTF-8">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
@@ -16,16 +17,35 @@
 
 		<div class="container">
 
-			<h1 align = "center"> Icebreaker </h1>
+			<div class = "row">
+				<div class = "col-lg-3"></div>
+				<div class = "col-lg-6">
+					<h2 align = "center"> Icebreaker </h2>
+				</div>
+				<div class = "col-lg-3">
+					<form action = "{{ url_for('logout') }}">
+						<button class = "btn btn-primary"> 
+								Logout
+						</button> 
+					</form>
+				</div>
+			</div>
 
-			<br> <br> <br> <br> <br>
+			<br>
+
+			<p align = "center"> Click one of the category below to generate a question. We recommend you cover at least 3 questions in each category </p>
+
+			<br> <br> <br>
 
 			<div class = "row">
 
-				<div class ="col-lg-1 col-sm-1"> </div>
+				<div class = "col-lg-1 pull-left">
+					<button type="button" class="btn btn-info"></button> : {{ categories_so_far.0}} <br>
+					<button type="button" class="btn btn-danger"></button> : {{ categories_so_far.1 }} <br>
+					<button type="button" class="btn btn-success"></button> : {{ categories_so_far.2 }} <br>
+				</div>
 
-
-				<div class = "col-lg-3 col-sm-8"> 
+				<div class = "col-lg-3"> 
 					<div class = "item"> 
 						<form action = "{{ url_for('question') }}" method = "post">
 							<button class = "btn btn-info btn-block" name = "category" value = "0"> 
@@ -36,7 +56,7 @@
 				</div>
 
 
-				<div class = "col-lg-3 col-sm-8"> 
+				<div class = "col-lg-3"> 
 					<div class = "item"> 
 						<form action = "{{ url_for('question') }}" method = "post">
 							<button class = "btn btn-danger btn-block" name = "category" value = "1"> 
@@ -47,7 +67,7 @@
 				</div>
 
 
-				<div class = "col-lg-3 col-sm-8"> 
+				<div class = "col-lg-3"> 
 					<div class = "item"> 
 						<form action = "{{ url_for('question') }}" method = "post">
 							<button class = "btn btn-success btn-block" name = "category" value = "2"> 
@@ -57,7 +77,7 @@
 					</div> 
 				</div>
 
-				<div class = "col-lg-2 col-sm-1"> 
+				<div class = "col-lg-2 pull-right"> 
 					<form action = "{{ url_for('question') }}" method = "post">
 						<button class = "btn" name = "category" value = "3"> Reset <i class ="fas fa-undo-alt"></i></button>
 					</form>
@@ -65,36 +85,13 @@
 
 			</div>
 
-			<br> <br> <br> <br> <br>
+			<br> <br> <br> <br>
 
-			<h3 align = "center"> {{ curr_question }} </h3>
+			<h2 align = "center"> {{ curr_question }} </h2>
+
+			<br> <br> <br> <br>
 
 		</div>
-
-		<br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
-
-		<div class = "col-lg-3 pull-right">
-			<button type="button" class="btn btn-info"></button> : {{ categories_so_far.0}} <br>
-			<button type="button" class="btn btn-danger"></button> : {{ categories_so_far.1 }} <br>
-			<button type="button" class="btn btn-success"></button> : {{ categories_so_far.2 }} <br>
-		</div>
-
-		<footer>
-			<div class = "col-lg-6 pull-right">
-				<ul>
-					{% for questions in questions_so_far %}
-						{% if questions.0 == 0 %}
-							<li> <button type="button" class="btn btn-info"></button> {{ questions.1 }} </li>
-						{% elif questions.0 == 1 %}
-							<li> <button type="button" class="btn btn-danger"></button> {{ questions.1 }} </li>
-						{% else %}
-							<li> <button type="button" class="btn btn-success"></button> {{ questions.1 }} </li>
-						{% endif %}
-					{% endfor %}
-				</ul>
-			</div>
-
-		</footer>
 
 	</body>
 </html>
