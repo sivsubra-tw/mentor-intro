@@ -23,11 +23,17 @@ questions = [
 
 questions_id = [random.randint(0,2),random.randint(0,2),random.randint(0,2)]
 questions_so_far = []
+categories_so_far = [0,0,0]
 
 @app.route("/", methods=["POST"])
 def question():
 	category = int(request.form.get("category"))
+
 	questions_id[category] += 1
 	questions_id[category] %= 3
-	questions_so_far.append(category);
+	categories_so_far[category] += 1
+
+	if categories_so_far[category] <= 3:
+		questions_so_far.append(category)
+
 	return render_template("index.html", question = questions[category][questions_id[category]], questions_so_far = questions_so_far)
