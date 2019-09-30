@@ -1,9 +1,10 @@
-<!DOCTYPE html>
+<!DOCTYPE html lang="en-GB">
 <html>
+	<meta charset="UTF-8">
 	<head>
-		<link rel="stylesheet" href="../style.css">
-		<link rel="stylesheet" href="style.css">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
 		<title> Jitheshraj Scholarship for promising freshmen </title>
 	</head>
@@ -16,7 +17,7 @@
 
 		<br> <br> <br> <br> <br>
 
-		<div class="container">
+		<div class="container" align = "center">
 
 			<div class = "row">
 
@@ -26,8 +27,8 @@
 				<div class = "col-lg-3 col-sm-8"> 
 					<div class = "item"> 
 						<form action = "{{ url_for('question') }}" method = "post">
-							<button class = "btn btn-info" name = "category" value = "0"> 
-								<h3> Personal </h3> 
+							<button class = "btn btn-info btn-block" name = "category" value = "0"> 
+								Personal
 							</button> 
 						</form>
 					</div> 
@@ -37,8 +38,8 @@
 				<div class = "col-lg-3 col-sm-8"> 
 					<div class = "item"> 
 						<form action = "{{ url_for('question') }}" method = "post">
-							<button class = "btn btn-danger" name = "category" value = "1"> 
-								<h3> Professional </h3> 
+							<button class = "btn btn-danger btn-block" name = "category" value = "1"> 
+								Professional
 							</button> 
 						</form>
 					</div> 
@@ -48,15 +49,17 @@
 				<div class = "col-lg-3 col-sm-8"> 
 					<div class = "item"> 
 						<form action = "{{ url_for('question') }}" method = "post">
-							<button class = "btn btn-success" name = "category" value = "2"> 
-								<h3> Miscellaneous </h3> 
+							<button class = "btn btn-success btn-block" name = "category" value = "2"> 
+								Miscellaneous
 							</button> 
 						</form>
 					</div> 
 				</div>
 
 
-				<div class = "col-lg-2 col-sm-1"> </div>
+				<div class = "col-lg-2 col-sm-1"> 
+					<button class = "btn" type = "reset"><i class ="fa fa-undo-alt"></i></button>
+				</div>
 
 			</div>
 
@@ -68,21 +71,24 @@
 
 		<br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
 
-		<footer align = "right">
+		<footer>
 
-			<div class="btn-group" role="group" aria-label="Basic example">
+			<div class="btn-group pull-right" role="group" aria-label="Basic example">
 
-			{% for question in questions_so_far %}
+				{% for question in questions_so_far %}
 
-				{% if question == 0 %}
-					  <button type="button" class="btn btn-info">Pe</button>
-				{% elif question == 1 %}
-					  <button type="button" class="btn btn-danger">Pr</button>
-				{% else %}
-					<button type="button" class="btn btn-success">Pr</button>
-				{% endif %}
+					{% if question == 0 %}
+						  <button type="button" class="btn btn-info">Pe</button>
+					{% elif question == 1 %}
+						  <button type="button" class="btn btn-danger">Pr</button>
+					{% else %}
+						<button type="button" class="btn btn-success">Mi</button>
+					{% endif %}
 
-			{% endfor %}
+				{% endfor %}
+
+			</div>
+
 		</footer>
 
 	</body>
