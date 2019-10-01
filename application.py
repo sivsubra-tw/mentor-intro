@@ -39,7 +39,7 @@ def index():
 def question():
 	category = int(request.form.get("category"))
 
-	if category == 3:
+	if category == 3 or session.get("questions_id") is None:
 		session.clear()
 		reset()
 		return render_template("index.html", questions_so_far = session["questions_so_far"], categories_so_far = session["categories_so_far"])
@@ -54,7 +54,6 @@ def question():
 
 @app.route("/summary")
 def logout():
-	print("Entered")
 	questions_so_far = session["questions_so_far"]
 	session.clear()
 	first = []
