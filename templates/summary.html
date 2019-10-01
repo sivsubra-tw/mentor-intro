@@ -17,7 +17,20 @@
 
 		<div class ="container">
 
-			<h3> A conversation to remember! </h3> <br> <br>
+			<div class = "row">
+
+				<div class = "col-lg-9">
+					<h3> A conversation to remember! </h3> <br> <br>
+				</div>
+
+				<div class = "col-lg-3">
+					<form action = "{{ url_for('index') }}">
+						<button class = "btn btn-primary"> Start another session </button>
+					</form>
+				</div>
+			</div>
+
+			<hr/>
 
 			<div class = "row">
 
