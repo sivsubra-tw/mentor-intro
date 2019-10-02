@@ -1,25 +1,19 @@
 from flask import Flask, render_template, request, session
 from flask_session import Session
+
 import random
+
+from sqlalchemy import create_engine
+from sqlalchemy.orm import scoped_session, sessionmaker
+
+engine = create_engine("postgres://wdaxldtkybvwcx:9ff8c1a17a091e693fec57232719724089da53603f754a26c05ddb316695e32d@ec2-176-34-183-20.eu-west-1.compute.amazonaws.com:5432/d77jf4piv3tg8t") #For DB connection
+db = scoped_session(sessionmaker(bind=engine))
 
 app = Flask(__name__)
 
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
-
-
-questions = [
-			 ['Tell me about a time when everything went wrong. How did you deal with it?', 
-			  'Describe a moment when you felt like you truly achieved something.',
-			  'What is your favourite childhood memory?'],
-			 ['Are there times when you feel like you do not like your job? If yes, what do you do then?', 
-			  'What is something you wish you knew before you started your career?', 
-			  'Have you ever had conflict with a colleague? How did you deal with it?'],
-			 ['What is your favourite hobby?', 
-			  'Do you have a role model? If yes, who is it? If no, why not?', 
-			  'Is there a book or movie that you think changed you as a person?']
-			]
 
 
 def reset():
