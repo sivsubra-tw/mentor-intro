@@ -1,18 +1,23 @@
 {% extends 'layout.html' %}
 
 {% block heading %}
-	<br> <br>
+	<br>
 
 	<div class="container-fluid">
+
 		<div class = "row">
-			<div class = "col-lg-2"></div>
-			<div class = "col-lg-8">
-				<h2 align = "center"> Icebreaker </h2>
-			</div>
-			<div class = "col-lg-2">
+			<div class = "col"> </div>
+			<div class = "col-lg-2 pull-right d-none d-md-block">
 				<button class = "btn btn-primary" data-toggle="modal" data-target="#logoutModal"> 
 						End session
 				</button> 
+			</div>
+		</div>
+
+		<div class = "row">
+			<div class = "col-lg-2 col-sm-2"></div>
+			<div class = "col-lg-8 col-sm-8">
+				<h2 align = "center"> Icebreaker </h2>
 			</div>
 		</div>
 
@@ -20,12 +25,11 @@
 
 	</div>
 
-	<div class = "container">
+	<div class = "container d-none d-md-block">
 
 		<p align = "center"> Click one of the category below to generate a question. We recommend you cover at least 3 questions in each category. <br> This is an exercise in getting to know you: so try to let the conversation flow rather than focussing on getting a "correct" answer. <br> <br>
 
-		<br> <hr/> <br> <br>
-
+		<hr/> <br> <br>
 		
 	</div>
 
@@ -38,7 +42,7 @@
 
 		<div class = "row">
 
-			<div class = "col-lg-2 text-left">
+			<div class = "col-lg-2 text-left d-none d-md-block">
 				<form action = "{{ url_for('question') }}" method = "post">
 					<button class = "btn btn-secondary" name = "category" value = "3"> Reset <i class ="fas fa-undo-alt"></i></button>
 				</form>
@@ -51,6 +55,10 @@
 				{% include 'card.html' %}
 			{% endwith %}
 
+			<div class = "d-block d-md-none">
+				<br> <br> <br>
+			</div>
+
 			<div class = "col-lg-1 pull-right"> 
 			</div>
 
@@ -58,6 +66,10 @@
 			{% with card_name = "Professional", category = "1" %}
 				{% include 'card.html' %}
 			{% endwith %}
+
+			<div class = "d-block d-md-none">
+				<br> <br> <br>
+			</div>
 
 
 			<div class = "col-lg-1 pull-right"> 
@@ -74,13 +86,34 @@
 
 	<div class = "container">
 
-		<br> <br> <br> <br>
+		<div class = "d-none d-md-block">
+			<br> <br> <br>
+		</div>
+
+		<br>
 
 		<h2 align = "center"> {{ curr_question }} </h2>
 
-		<br> <br> <br> <br>
+		<div class = "d-none d-md-block">
+			<br> <br> <br> 
+		</div>
+
+		<br>
 
 	</div>
+
+	<footer>
+		<div class = "container d-block d-md-none">
+			<div class = "row">
+				<div class = "col-sm-8"> </div>
+				<div class = "col-sm-4">
+					<button class = "btn btn-primary" data-toggle="modal" data-target="#logoutModal"> 
+							End session
+					</button> 
+				</div>
+			</div>
+		</div>
+	</footer>
 
 	{% include 'logout.html' %}
 

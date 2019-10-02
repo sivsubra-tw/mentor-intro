@@ -1,5 +1,58 @@
-h1 {
-	text-align: center;
+/*
+::::::::::::::::::::::::::::::::::::::::::::::::::::
+Bootstrap 4 breakpoints
+*/
+/* Small devices (landscape phones, 544px and up) */
+@media (min-width: 320px) {  
+	h2 {font-size:1.2rem;} /*1rem = 16px*/
+	h3 {font-size:1rem;}
+	p {font-size:0.8rem;}
+	.btn-block {
+		padding: 5% 0;
+	}
+
+	.item {
+		padding: ;
+	}
+}
+ 
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+@media (min-width: 768px) {  
+	h2 {font-size:1.4rem;} /*1rem = 16px*/
+	h3 {font-size:1.3rem;}
+	p {font-size:0.9rem;}
+	.btn-block {
+		padding: 15% 0;
+	}
+	.item {
+		width: 30%;
+	}
+}
+ 
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) { 
+	h2 {font-size:1.8rem;} /*1rem = 16px*/
+	h3 {font-size:1.6rem;}
+	p {font-size:0.9rem;}
+	.btn-block {
+		padding: 20% 0;
+	}
+	.item {
+		width: 100%;
+	}
+}
+ 
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {  
+  h2 {font-size:2rem;} /*1rem = 16px*/ 
+  h3 {font-size:1.8rem;} 
+  p {font-size:1rem;}
+  .btn-block {
+  	padding: 20% 0;
+  }
+  .item {
+		width: 100%;
+	}
 }
 
 .space100{
@@ -15,7 +68,6 @@ h1 {
 }
 
 .btn-block {
-    padding: 20% 0;
     border-color: black;
     border-width: 3px;
     /* define values in pixels / Percentage or em. whatever suits 
