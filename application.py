@@ -6,6 +6,8 @@ import random
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
+## Initial setup ##
+
 engine = create_engine("postgres://wdaxldtkybvwcx:9ff8c1a17a091e693fec57232719724089da53603f754a26c05ddb316695e32d@ec2-176-34-183-20.eu-west-1.compute.amazonaws.com:5432/d77jf4piv3tg8t") #For DB connection
 db = scoped_session(sessionmaker(bind=engine))
 
@@ -15,14 +17,29 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-questions = db.execute("SELECT category, question FROM questions").fetchall()
 
+## Fetch all questions of each category from the DB ##
+
+all_questions = []
+questions_in_category = []
+
+for i in range(3):
+	rows = db.execute("SELECT question FROM questions WHERE category = (:category)",{"category":i}).fetchall()
+	for each_row in rows:
+		questions_in_category.append(each_row.question)
+	all_questions.append(questions_in_category)
+
+
+## Utility functions ##
 
 def reset():
 	session["questions_so_far"] =[] #Maintains a pair list of category, question
 	session["questions_id"] = [random.randint(0,2),random.randint(0,2),random.randint(0,2)] #Maintains starting index of each category
 	session["categories_so_far"] = [0,0,0] #Maintains a questions counter for each category
 
+
+
+## Flask routes ##
 
 @app.route("/")
 def index():
@@ -39,12 +56,14 @@ def question():
 		session.clear()
 		reset()
 		return render_template("index.html", questions_so_far = session["questions_so_far"], categories_so_far = session["categories_so_far"])
+
 	else :
 		session["questions_id"][category] += 1
 		session["questions_id"][category] %= 5
 		session["categories_so_far"][category] += 1
-		questions = db.execute("SELECT question FROM questions WHERE category = (:category)",{"category":category}).fetchall()
-		curr_question = questions[session["questions_id"][category]].question
+
+		curr_question_id = session["questions_id"][category]
+		curr_question = all_questions[category][curr_question_id]
 		session["questions_so_far"].append((category,curr_question))
 
 		return render_template("index.html", curr_question = curr_question, category = category, questions_so_far = session["questions_so_far"], 
