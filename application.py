@@ -21,20 +21,22 @@ Session(app)
 ## Fetch all questions of each category from the DB ##
 
 all_questions = []
-questions_in_category = []
 
 for i in range(3):
+	questions_in_category = []
 	rows = db.execute("SELECT question FROM questions WHERE category = (:category)",{"category":i}).fetchall()
 	for each_row in rows:
 		questions_in_category.append(each_row.question)
+	print(questions_in_category)
 	all_questions.append(questions_in_category)
 
 
 ## Utility functions ##
 
 def reset():
+	session.clear()
 	session["questions_so_far"] =[] #Maintains a pair list of category, question
-	session["questions_id"] = [random.randint(0,2),random.randint(0,2),random.randint(0,2)] #Maintains starting index of each category
+	session["questions_id"] = [random.randint(0,4),random.randint(0,4),random.randint(0,4)] #Maintains starting index of each category
 	session["categories_so_far"] = [0,0,0] #Maintains a questions counter for each category
 
 
