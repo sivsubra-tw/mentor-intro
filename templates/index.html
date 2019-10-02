@@ -1,138 +1,87 @@
-<!DOCTYPE html >
-<html lang="en-GB">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends 'layout.html' %}
 
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-		<script src="https://kit.fontawesome.com/0e59a4940c.js" crossorigin="anonymous"></script>
-		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+{% block heading %}
+	<br> <br>
 
-		<title> Icebreaker </title>
-	</head>
+	<div class="container-fluid">
+		<div class = "row">
+			<div class = "col-lg-2"></div>
+			<div class = "col-lg-8">
+				<h2 align = "center"> Icebreaker </h2>
+			</div>
+			<div class = "col-lg-2">
+				<button class = "btn btn-primary" data-toggle="modal" data-target="#logoutModal"> 
+						End session
+				</button> 
+			</div>
+		</div>
 
-	<body>
+		<br>
 
-		<br> <br>
+	</div>
 
-		<div class="container-fluid">
-			<div class = "row">
-				<div class = "col-lg-2"></div>
-				<div class = "col-lg-8">
-					<h2 align = "center"> Icebreaker </h2>
-				</div>
-				<div class = "col-lg-2">
-					<button class = "btn btn-primary" data-toggle="modal" data-target="#logoutModal"> 
-							End session
-					</button> 
-				</div>
+	<div class = "container">
+
+		<p align = "center"> Click one of the category below to generate a question. We recommend you cover at least 3 questions in each category. <br> This is an exercise in getting to know you: so try to let the conversation flow rather than focussing on getting a "correct" answer. <br> <br>
+
+		<br> <hr/> <br> <br>
+
+		
+	</div>
+
+{% endblock %}
+
+
+{% block body %}
+
+	<div class ="container-fluid">
+
+		<div class = "row">
+
+			<div class = "col-lg-2 text-left">
+				<form action = "{{ url_for('question') }}" method = "post">
+					<button class = "btn btn-secondary" name = "category" value = "3"> Reset <i class ="fas fa-undo-alt"></i></button>
+				</form>
+				<button type="button" class="btn btn-info"></button> : {{ categories_so_far.0}} <br>
+				<button type="button" class="btn btn-danger"></button> : {{ categories_so_far.1 }} <br>
+				<button type="button" class="btn btn-success"></button> : {{ categories_so_far.2 }} <br>
 			</div>
 
-			<br>
+			{% with card_name = "Personal", category = "0" %}
+				{% include 'card.html' %}
+			{% endwith %}
 
-		</div>
+			<div class = "col-lg-1 pull-right"> 
+			</div>
 
-		<div class = "container">
-
-			<p align = "center"> Click one of the category below to generate a question. We recommend you cover at least 3 questions in each category. <br> This is an exercise in getting to know you: so try to let the conversation flow rather than focussing on getting a "correct" answer. <br> <br>
-
-			<br> <hr/>
-
-			<br> <hr/> <br> <br>
-
-			
-		</div>
-
-
-		<div class ="container-fluid">
-
-			<div class = "row">
-
-				<div class = "col-lg-2 text-left">
-					<form action = "{{ url_for('question') }}" method = "post">
-						<button class = "btn btn-secondary" name = "category" value = "3"> Reset <i class ="fas fa-undo-alt"></i></button>
-					</form>
-					<button type="button" class="btn btn-info"></button> : {{ categories_so_far.0}} <br>
-					<button type="button" class="btn btn-danger"></button> : {{ categories_so_far.1 }} <br>
-					<button type="button" class="btn btn-success"></button> : {{ categories_so_far.2 }} <br>
-				</div>
  
-				<div class = "col-lg-2 text-left"> 
-					<div class = "item"> 
-						<form action = "{{ url_for('question') }}" method = "post">
-							<button class = "btn btn-info btn-block" name = "category" value = "0"> 
-								<h3> Personal </h3>
-							</button> 
-						</form>
-					</div> 
-				</div>
-
-				<div class = "col-lg-1 pull-right"> 
-				</div>
+			{% with card_name = "Professional", category = "1" %}
+				{% include 'card.html' %}
+			{% endwith %}
 
 
-				<div class = "col-lg-2"> 
-					<div class = "item"> 
-						<form action = "{{ url_for('question') }}" method = "post">
-							<button class = "btn btn-danger btn-block" name = "category" value = "1"> 
-								<h3> Professional </h3>
-							</button> 
-						</form>
-					</div> 
-				</div>
-
-
-				<div class = "col-lg-1 pull-right"> 
-				</div>
-
-				<div class = "col-lg-2"> 
-					<div class = "item"> 
-						<form action = "{{ url_for('question') }}" method = "post">
-							<button class = "btn btn-success btn-block" name = "category" value = "2"> 
-								<h3> Miscellaneous </h3>
-							</button> 
-						</form>
-					</div> 
-				</div>
-
+			<div class = "col-lg-1 pull-right"> 
 			</div>
 
-		</div>
+			{% with card_name = "Miscellaneous", category = "2" %}
+				{% include 'card.html' %}
+			{% endwith %}
 
-		<div class = "container">
-
-			<br> <br> <br> <br>
-
-			<h2 align = "center"> {{ curr_question }} </h2>
-
-			<br> <br> <br> <br>
 
 		</div>
 
-		<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="logoutModalLabel"> End session </h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						Are you sure you want to end this session?
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<form action = "{{ url_for('logout') }}">
-							<button class="btn btn-primary">Confirm</button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
+	</div>
 
-	</body>
-</html>
+	<div class = "container">
+
+		<br> <br> <br> <br>
+
+		<h2 align = "center"> {{ curr_question }} </h2>
+
+		<br> <br> <br> <br>
+
+	</div>
+
+	{% include 'logout.html' %}
+
+{% endblock body%}
