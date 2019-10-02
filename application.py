@@ -15,6 +15,8 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
+questions = db.execute("SELECT category, question FROM questions").fetchall()
+
 
 def reset():
 	session["questions_so_far"] =[] #Maintains a pair list of category, question
@@ -26,7 +28,7 @@ def reset():
 def index():
 	if session.get("questions_so_far") is None:
 		reset()
-	return render_template("index.html", questions_so_far = session["questions_so_far"], categories_so_far = session["categories_so_far"])
+	return render_template("index.html", questions_so_far = session["questions_so_far"], categories_so_far = session["categories_so_far"], start_timer = False)
 
 
 @app.route("/", methods=["POST"])
@@ -39,26 +41,31 @@ def question():
 		return render_template("index.html", questions_so_far = session["questions_so_far"], categories_so_far = session["categories_so_far"])
 	else :
 		session["questions_id"][category] += 1
-		session["questions_id"][category] %= 3
+		session["questions_id"][category] %= 5
 		session["categories_so_far"][category] += 1
-		session["questions_so_far"].append((category,questions[category][session["questions_id"][category]]))
+		questions = db.execute("SELECT question FROM questions WHERE category = (:category)",{"category":category}).fetchall()
+		curr_question = questions[session["questions_id"][category]].question
+		session["questions_so_far"].append((category,curr_question))
 
-		return render_template("index.html", curr_question = questions[category][session["questions_id"][category]], questions_so_far = session["questions_so_far"], 
-				categories_so_far = session["categories_so_far"])
+		return render_template("index.html", curr_question = curr_question, category = category, questions_so_far = session["questions_so_far"], 
+				categories_so_far = session["categories_so_far"], start_timer = True)
 
 @app.route("/summary")
 def logout():
-	questions_so_far = session["questions_so_far"]
-	session.clear()
-	first = []
-	second = []
-	third = []
-	for category, question in questions_so_far:
-		if category == 0:
-			first.append(question)
-		elif category == 1:
-			second.append(question)
-		else:
-			third.append(question)
-	return render_template("summary.html", first = first, second = second, third = third)
+	if session.get("questions_so_far") is not None:
+		questions_so_far = session["questions_so_far"]
+		session.clear()
+		first = []
+		second = []
+		third = []
+		for category, question in questions_so_far:
+			if category == 0:
+				first.append(question)
+			elif category == 1:
+				second.append(question)
+			else:
+				third.append(question)
+		return render_template("summary.html", first = first, second = second, third = third, start_timer = False)
+	else:
+		return render_template("expired.html")
 	
